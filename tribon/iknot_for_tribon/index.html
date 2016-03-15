@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>post</title>
+  <link rel="stylesheet" href="/pygments.css">
+  <link rel="stylesheet" href="/static/bootstrap.css">
+  <script src="/static/jquery.js"></script>
+  <script src="/static/bootstrap.js"></script>
+  <link rel="stylesheet" href="/static/blog.css">
+  <style media="screen">
+    #wrapper {
+      width: 700px;
+      position: relative;
+      left: 50%;
+      margin-left: -350px;
+    }
+    body{
+        /*position: relative;*/
+    }
+    #navbar{
+        border-left: 1px solid;
+        border-color: #DDD;
+        position: fixed;
+        top:180px;
+        right: 50px;
+    }
+  </style>
+  <script type="text/javascript">
+      var index=1;
+      $(document).ready(function(){
+         $('h2').each(function(){
+             var h_id='h'+index;
+             $(this).attr('id',h_id);
+             $('#navbar ul').append('<li role="presentation"><a href="#'+h_id+'">'+$(this).text()+'</a></li>');
+             index+=1;
+         })
+      });
+      $('body').scrollspy({ target: '#navbar' });
+  </script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+  <div id="wrapper">
+    <h1 id='top' class="text-center">iknot-tribon二次开发插件</h1>
+    <hr/>
+    <div class="col-md-12">
+      <h2>如何下载</h2>
+<p>iknot-tribon代码托管在github上，你可以访问<a href="git@github.com:knottech/iknot-tribon.git">git@github.com:knottech/iknot-tribon.git</a>来跟踪这个项目或clone代码。</p>
+<p>你也可以通过以下两种方式下载代码包：
+1. <a href="https://github.com/knottech/iknot-tribon/archive/master.zip">github下载</a>
+2. <a href="/blog/static/tribon/download/iknot-tribon.zip">本地下载</a></p>
+<p>如果你对vitesse开发感兴趣，也可以下载<a href="/blog/static/tribon/download/python_23_libs.zip">Vitesse开发工具</a>，这里有开发所需的基本工具。</p>
+<h2>如何安装</h2>
+<p>下载代码后，只需要2步，就可以使用iknot插件了。</p>
+<p><strong> 1.放到vitesse目录</strong></p>
+<p>将其中的iknot文件夹（只需要拷贝iknot文件夹，如果下载包中有其他文件，可以忽略）放在Vitesse目录下，默认应该是”C:\Tribon\M3\Vitesse“。如果你将Tribon安装在其他目录，或者你更改过Vitesse的指向，你可以通过Tribon环境变量”PYTHON_PATH“查询。</p>
+<p><strong> 2. 编辑trig_draft_init.py文件</strong></p>
+<p>然后编辑trig_draft_init.py文件。该文件在Vitesse\Trigger目录下，用记事本打开该文件，在其中的post函数中加入”import iknot"语句即可，如下图所示：<font color=red>（缩进的地方注意上下对齐，并请使用空格，不要用制表符，否则可能调用失败）</font></p>
+<p><img alt="" src="/blog/static/tribon/img/trig_py.jpg" /></p>
+<p>如果您之前没有安装过任何其他的二次开发产品，你可以从<a href="/blog/static/tribon/download/trig_draft_init.zip">这里</a>下载一份"trig_draft_init.py"，将原文件覆盖掉。（覆盖前建议备份之前的文件，以防万一）</p>
+<p>最后，打开drafting模块，看看help菜单前面是否多了一个iknot菜单呢？开始使用吧！</p>
+<p><br/></p>
+<h2>功能介绍</h2>
+<p><br/></p>
+<h3>批注</h3>
+<hr />
+<p>批注模块（ktNote）用于在TRIBON图纸上添加一些批注信息，比如审图意见、修改要求等。可以通过该模块对当前图纸上的批注进行集中管理。</p>
+<p><img alt="input_text" src="/blog/static/tribon/img/ktNote/note.jpg" /></p>
+<h4>菜单：</h4>
+<p><img alt="menu" src="/blog/static/tribon/img/ktNote/menu.jpg" /></p>
+<h4>增加批注</h4>
+<p>在弹出的对话框中输入批注内容，然后再图纸上选择批注文字的位置就可以了。
+<img alt="input_text" src="/blog/static/tribon/img/ktNote/input_text.jpg" /></p>
+<h4>删除批注</h4>
+<p>选择该命令后，在图纸上点击要删除的批注，即可删除。</p>
+<h4>查看批注</h4>
+<p>在弹出的批注列表中选中要查看的批注，视图会自动缩放到批注所在的图纸位置。
+<img alt="menu" src="/blog/static/tribon/img/ktNote/show.jpg" /></p>
+<h4>隐藏和显示批注</h4>
+<p>通过这两个命令可以快速隐藏和现实当前图纸上的批注信息。你可能在打印等操作时会用到这个命令。</p>
+<p><br/></p>
+<h3>文字处理功能</h3>
+<hr />
+<p>文字处理模块可用来对图纸上的文字各种批量处理。</p>
+<p><img alt="menu" src="/blog/static/tribon/img/ktText/menu.jpg" /></p>
+<h4>下划线</h4>
+<p>用于在所选文字下方加下划线： <br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/underline.jpg" /></p>
+<h4>下划曲线</h4>
+<p>用于在所选文字下方加下划曲线：<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/undeeline.jpg" /></p>
+<h4>加框</h4>
+<p>用于给所选文字加上边框：<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/rect.jpg" /></p>
+<h4>格式刷</h4>
+<p>用于批量修改文字的字体、颜色、高度等属性。单个模式可连续修改指定文字的属性，区域模式用于修改指定区域内的所有文字的属性。<br />
+使用前：<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/format_before.jpg" /><br />
+使用后：<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/format_after.jpg" />  </p>
+<h4>查找、替换</h4>
+<p>用于查找图纸中指定的文字，并决定是否替换成其他文字。<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/find_replace.jpg" /></p>
+<h4>放大、缩小</h4>
+<p>用于对单个文本连续进行放大、缩小操作。</p>
+<h4>对齐</h4>
+<p>用于对所选区域内的所有文本进行左对齐、右对齐、上对齐或下对齐。<br />
+<img alt="menu" src="/blog/static/tribon/img/ktText/align_left.jpg" /></p>
+<p><br/></p>
+<h3>测量功能</h3>
+<hr />
+<p>测量功能用于查询图纸上的坐标信息和距离信息。</p>
+<h4>坐标查询</h4>
+<p>在图纸上选择要查询的店，即可在信息窗口（Message Window）中看到点的坐标信息。<br />
+<img alt="coord" src="/blog/static/tribon/img/ktMeasure/point_coord.jpg" /></p>
+<h4>距离查询</h4>
+<p>在图纸上依次选择两个点，即可在信息窗口看到两点间的距离等信息。<br />
+<img alt="coord" src="/blog/static/tribon/img/ktMeasure/distance.jpg" /></p>
+<p><br/></p>
+<h3>表格功能</h3>
+<hr />
+<p>表格模块用于在TRIBON图纸上创建、修改表格的格式和内容。</p>
+<h4>菜单：</h4>
+<p><img alt="table" src="/blog/static/tribon/img/ktTable/iknot_table_menu.jpg" /></p>
+<h4>新建表格</h4>
+<p>在弹出的对话框中依次填入新建表格的列数、行数、每个单元格的宽度值，然后再图纸上选取表格插入位置，即可创建新的表格。<br />
+<img alt="table" src="/blog/static/tribon/img/ktTable/ktTable_input.jpg" /></p>
+<h4>设置列文字</h4>
+<p>选择表格中的列，输入文本内容，即可将所输入的问题填入该列的所有单元格中。<br />
+<img alt="table" src="/blog/static/tribon/img/ktTable/ktTable_set_text2.jpg" /></p>
+<h4>设置列宽</h4>
+<p>选择表格中的列，输入新的宽度值，该列的宽度即发生改变。该列右侧的其他列也会跟着变化。
+<img alt="table" src="/blog/static/tribon/img/ktTable/ktTable_set_width.jpg" /></p>
+<h4>修改单元格</h4>
+<p>用于修改某个单元格的文字。</p>
+<h4>移动列</h4>
+<p>用于移动指定的列的位置。该命令不会影响其他列的位置，如下图。<br />
+<img alt="table" src="/blog/static/tribon/img/ktTable/ktTable_move.jpg" /></p>
+<p><br/></p>
+<h3>图框功能</h3>
+<hr />
+<p>图框模块目前仅用于在当前图纸中快速创建指定数量的图框。
+在对话框中 输入图框的数量后，图纸中即可看到图框。</p>
+<p><img alt="form" src="/blog/static/tribon/img/ktForm/input_number.jpg" /><br />
+<img alt="form" src="/blog/static/tribon/img/ktForm/new.jpg" /></p>
+<p><br/></p>
+<h2>建议</h2>
+<p>如果您有任何关于二次开发的想法，希望您能告诉我。您可以通过邮箱：iknot@qq.com 给我发邮件，或者<a href="/blog/comment/">戳这里</a>写下您的建议。也欢迎您关注微信公众号 <strong>iknot</strong> 。</p>
+<p>扫描二维码直接关注：<img src="/blog/static/tribon/img/qrcode_weixin.jpg" width=150 height=150 alt='qrcode'/></p>
+    </div>
+    <div id='navbar'>
+      <ul class="nav nav-stacked">
+          <li role="presentation"><a href="#top">顶部</a></li>
+      </ul>
+    </div>
+    <a href="/blog"><img style="position: fixed; top: 0; right: 0; border: 0;" src="/static/ianblog.png" alt="IAN's blog" /></a>
+  </div>
+</body>
+
+</html>

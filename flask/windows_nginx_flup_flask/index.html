@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>post</title>
+  <link rel="stylesheet" href="/pygments.css">
+  <link rel="stylesheet" href="/static/bootstrap.css">
+  <script src="/static/jquery.js"></script>
+  <script src="/static/bootstrap.js"></script>
+  <link rel="stylesheet" href="/static/blog.css">
+  <style media="screen">
+    #wrapper {
+      width: 700px;
+      position: relative;
+      left: 50%;
+      margin-left: -350px;
+    }
+    body{
+        /*position: relative;*/
+    }
+    #navbar{
+        border-left: 1px solid;
+        border-color: #DDD;
+        position: fixed;
+        top:180px;
+        right: 50px;
+    }
+  </style>
+  <script type="text/javascript">
+      var index=1;
+      $(document).ready(function(){
+         $('h2').each(function(){
+             var h_id='h'+index;
+             $(this).attr('id',h_id);
+             $('#navbar ul').append('<li role="presentation"><a href="#'+h_id+'">'+$(this).text()+'</a></li>');
+             index+=1;
+         })
+      });
+      $('body').scrollspy({ target: '#navbar' });
+  </script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+  <div id="wrapper">
+    <h1 id='top' class="text-center">在windows server部署nginx+flask</h1>
+    <hr/>
+    <div class="col-md-12">
+      <h2>环境准备</h2>
+<ol>
+<li>下载 <a href="http://nginx.org/en/download.html">nginx for windows</a></li>
+<li>安装flup
+    pip install flup</li>
+</ol>
+<h2>准备run.py</h2>
+<p>在开发时，我们一般使用flask自带的web服务器。当host参数设为'0.0.0.0'时，外部网络也可以访问我们的站点。</p>
+<div class="codehilite"><pre><span></span>app.run(debug=True,host=&#39;0.0.0.0&#39;)
+</pre></div>
+
+
+<p>但在生产环境中，我们最好使用nginx等较为成熟稳定的web server。这里我们用flup来为nginx提供服务。将下列代码保存为 run.py ，然后打开控制台，输入python run.py执行该文件并启动服务</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">flup.server.fcgi</span> <span class="kn">import</span> <span class="n">WSGIServer</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">WSGIServer</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">bindAddress</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">8080</span><span class="p">))</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>运行nginx</h2>
+<p>打开nginx/conf目录下的nginx.conf文件并进行配置：</p>
+<div class="codehilite"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span> <span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">@</span><span class="n">app</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">location</span> <span class="k">@app</span> <span class="p">{</span>
+<span class="nt">include</span> <span class="nt">fastcgi_params</span><span class="o">;</span>
+<span class="nt">fastcgi_param</span> <span class="nt">PATH_INFO</span> <span class="o">$</span><span class="nt">fastcgi_script_name</span><span class="o">;</span>
+<span class="nt">fastcgi_param</span> <span class="nt">SCRIPT_NAME</span> <span class="s2">&quot;&quot;</span><span class="o">;</span>
+<span class="nt">fastcgi_pass</span> <span class="nt">127</span><span class="nc">.0.0.1</span><span class="nd">:8080</span><span class="o">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>具体操作可参考<a href="http://dormousehole.readthedocs.org/en/latest/deploying/fastcgi.html#nginx">flask教程</a></p>
+<hr />
+<h2>原理</h2>
+<ol>
+<li>客户端发送request到nginx服务器</li>
+<li>nginx根据fastcgi规范把request转发给flup</li>
+<li>flup根据WSGI接口规范调用flask框架提供的应用</li>
+</ol>
+<hr />
+<h3>名词解释：</h3>
+<p><strong>nginx</strong>: web server，接收客户端request并转发给flup等cgi服务</p>
+<p><strong>flup</strong>: fastcgi server，根据WSGI规范调用python应用</p>
+<p><strong>fastcgi</strong>: nginx和flup的底层通信规范</p>
+<p><strong>WSGI</strong>：为Python定义的Web服务器和Web应用程序或框架之间的一种接口规范</p>
+<p><strong>flask</strong>:web框架</p>
+    </div>
+    <div id='navbar'>
+      <ul class="nav nav-stacked">
+          <li role="presentation"><a href="#top">顶部</a></li>
+      </ul>
+    </div>
+    <a href="/blog"><img style="position: fixed; top: 0; right: 0; border: 0;" src="/static/ianblog.png" alt="IAN's blog" /></a>
+  </div>
+</body>
+
+</html>

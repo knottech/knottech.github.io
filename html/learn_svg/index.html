@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>post</title>
+  <link rel="stylesheet" href="/pygments.css">
+  <link rel="stylesheet" href="/static/bootstrap.css">
+  <script src="/static/jquery.js"></script>
+  <script src="/static/bootstrap.js"></script>
+  <link rel="stylesheet" href="/static/blog.css">
+  <style media="screen">
+    #wrapper {
+      width: 700px;
+      position: relative;
+      left: 50%;
+      margin-left: -350px;
+    }
+    body{
+        /*position: relative;*/
+    }
+    #navbar{
+        border-left: 1px solid;
+        border-color: #DDD;
+        position: fixed;
+        top:180px;
+        right: 50px;
+    }
+  </style>
+  <script type="text/javascript">
+      var index=1;
+      $(document).ready(function(){
+         $('h2').each(function(){
+             var h_id='h'+index;
+             $(this).attr('id',h_id);
+             $('#navbar ul').append('<li role="presentation"><a href="#'+h_id+'">'+$(this).text()+'</a></li>');
+             index+=1;
+         })
+      });
+      $('body').scrollspy({ target: '#navbar' });
+  </script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+  <div id="wrapper">
+    <h1 id='top' class="text-center">SVG学习笔记</h1>
+    <hr/>
+    <div class="col-md-12">
+      <h2>HTML标签</h2>
+<p>在HTML文件中，可通过&lt;embed&gt;、&lt;object&gt;、&lt;iframe&gt;标签将外部SVG文件嵌入到文档，也可直接使用&lt;svg&gt;标签在文档中嵌入代码。</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;circle</span> <span class="na">cx=</span><span class="s">&quot;100&quot;</span> <span class="na">cy=</span><span class="s">&quot;50&quot;</span> <span class="na">r=</span><span class="s">&quot;40&quot;</span> <span class="na">stroke=</span><span class="s">&quot;black&quot;</span> <span class="na">stroke-width=</span><span class="s">&quot;2&quot;</span> <span class="na">fill=</span><span class="s">&quot;red&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<h2>预定义形状</h2>
+<p>SVG有一些预定义的形状元素，可被开发者使用和操作：</p>
+<ol>
+<li>
+<p>矩形 &lt;rect&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;rect</span> <span class="na">width=</span><span class="s">&quot;200&quot;</span> <span class="na">height=</span><span class="s">&quot;100&quot;</span> <span class="na">style=</span><span class="s">&quot;fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+  <rect width="200" height="100" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/>
+</svg></p>
+</li>
+<li>
+<p>圆形 &lt;circle&gt;</p>
+<div class="codehilite"><pre><span></span>&lt;svg&gt;
+    &lt;circle cx=&quot;100&quot; cy=&quot;50&quot; r=&quot;40&quot; stroke=&quot;black&quot; stroke-width=&quot;2&quot; fill=&quot;red&quot;/&gt;
+&lt;svg&gt;
+</pre></div>
+
+
+<p><svg>
+    <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
+<svg></p>
+</li>
+<li>
+<p>椭圆 &lt;ellipse&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+    <span class="nt">&lt;ellipse</span> <span class="na">cx=</span><span class="s">&quot;100&quot;</span> <span class="na">cy=</span><span class="s">&quot;80&quot;</span> <span class="na">rx=</span><span class="s">&quot;100&quot;</span> <span class="na">ry=</span><span class="s">&quot;50&quot;</span> <span class="na">style=</span><span class="s">&quot;fill:yellow;stroke:purple;stroke-width:2&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+    <ellipse cx="100" cy="60" rx="80" ry="30" style="fill:yellow;stroke:purple;stroke-width:2"/>
+</svg></p>
+</li>
+<li>
+<p>线段 &lt;line&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+    <span class="nt">&lt;line</span> <span class="na">x1=</span><span class="s">&quot;0&quot;</span> <span class="na">y1=</span><span class="s">&quot;0&quot;</span> <span class="na">x2=</span><span class="s">&quot;200&quot;</span> <span class="na">y2=</span><span class="s">&quot;200&quot;</span> <span class="na">style=</span><span class="s">&quot;stroke:rgb(255,0,0);stroke-width:2&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+    <line x1="0" y1="0" x2="200" y2="60" style="stroke:rgb(255,0,0);stroke-width:2"/>
+</svg></p>
+</li>
+<li>
+<p>多段线 &lt;polyline&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+    <span class="nt">&lt;polyline</span> <span class="na">points=</span><span class="s">&quot;20,20 60,25 160,40 180,30 200,10&quot;</span> <span class="na">style=</span><span class="s">&quot;fill:none;stroke:black;stroke-width:3&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+    <polyline points="20,20 60,25 160,40 180,30 200,10" style="fill:none;stroke:black;stroke-width:3" />
+</svg></p>
+</li>
+<li>
+<p>多边形 &lt;polygon&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+    <span class="nt">&lt;polygon</span> <span class="na">points=</span><span class="s">&quot;200,10 300,50 50,50&quot;</span> <span class="na">style=</span><span class="s">&quot;fill:lime;stroke:purple;stroke-width:1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+    <polygon points="200,10 300,50 50,50" style="fill:lime;stroke:purple;stroke-width:1"/>
+</svg></p>
+</li>
+<li>
+<p>文本 &lt;text&gt;</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;text</span> <span class="na">x=</span><span class="s">&quot;0&quot;</span> <span class="na">y=</span><span class="s">&quot;15&quot;</span> <span class="na">fill=</span><span class="s">&quot;red&quot;</span><span class="nt">&gt;</span>iknot.org<span class="nt">&lt;/text&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+  <text x="0" y="15" fill="red">iknot.org</text>
+</svg></p>
+</li>
+</ol>
+<h2>路径 &lt;path&gt;</h2>
+<p><path> 元素用于定义一个路径,下面的命令可用于路径数据。所有命令均允许小写字母。大写表示绝对定位，小写表示相对定位。</p>
+<blockquote>
+<ul>
+<li>M = moveto</li>
+<li>L = lineto</li>
+<li>H = horizontal lineto</li>
+<li>V = vertical lineto</li>
+<li>C = curveto</li>
+<li>S = smooth curveto</li>
+<li>Q = quadratic Bézier curve</li>
+<li>T = smooth quadratic Bézier curveto</li>
+<li>A = elliptical Arc</li>
+<li>Z = closepath</li>
+</ul>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;svg&gt;</span>
+  <span class="nt">&lt;g</span> <span class="na">fill=</span><span class="s">&quot;none&quot;</span> <span class="na">stroke=</span><span class="s">&quot;black&quot;</span> <span class="na">stroke-width=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;path</span> <span class="na">stroke-dasharray=</span><span class="s">&quot;5,5&quot;</span> <span class="na">d=</span><span class="s">&quot;M5 20 L215 20&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;path</span> <span class="na">stroke-dasharray=</span><span class="s">&quot;10,10&quot;</span> <span class="na">d=</span><span class="s">&quot;M5 40 L215 60&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/g&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</pre></div>
+
+
+<p><svg>
+  <g fill="none" stroke="black" stroke-width="2">
+    <path stroke-dasharray="5,5" d="M5 20 L215 20" />
+    <path stroke-dasharray="10,10" d="M5 40 L215 60" />
+  </g>
+</svg></p>
+<h2>Stroke属性（线型）</h2>
+<blockquote>
+<ul>
+<li>stroke:颜色</li>
+<li>stroke-width：线宽</li>
+<li>stroke-linecap：端部形状</li>
+<li>stroke-dasharray：线型数据（实虚线）  </li>
+</ul>
+</blockquote>
+<p>下列数据20,10,5,5,5,10依次定义了实、虚、实、虚、实、虚部分的长度</p>
+<div class="codehilite"><pre><span></span>&lt;path stroke-dasharray=&quot;20,10,5,5,5,10&quot; d=&quot;M5 60 l215 0&quot; /&gt;
+</pre></div>
+
+
+<p><svg>
+  <g fill="none" stroke="black" stroke-width="2">
+    <path stroke-dasharray="20,10,5,5,5,10" d="M5 60 l215 0" />
+  </g>
+</svg></p>
+<h2><em>参考</em></h2>
+<hr />
+<h3>SVG和canvas的区别:</h3>
+<p><strong>Canvas:</strong></p>
+<blockquote>
+<p>依赖分辨率<br />
+不支持事件处理器<br />
+弱的文本渲染能力<br />
+能够以 .png 或 .jpg 格式保存结果图像<br />
+最适合图像密集型的游戏，其中的许多对象会被频繁重绘</p>
+</blockquote>
+<p><strong>SVG:</strong></p>
+<blockquote>
+<p>不依赖分辨率<br />
+支持事件处理器<br />
+最适合带有大型渲染区域的应用程序（比如谷歌地图）<br />
+复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）<br />
+不适合游戏应用</p>
+</blockquote>
+    </div>
+    <div id='navbar'>
+      <ul class="nav nav-stacked">
+          <li role="presentation"><a href="#top">顶部</a></li>
+      </ul>
+    </div>
+    <a href="/blog"><img style="position: fixed; top: 0; right: 0; border: 0;" src="/static/ianblog.png" alt="IAN's blog" /></a>
+  </div>
+</body>
+
+</html>
